@@ -4,8 +4,8 @@ Repository for turn based game hosted at www.playtotm.com
 
 ## Key contributors:
 
-*Nathan Phennel - front-end
-*Habib Adam - game-engine, database structure
+* Nathan Phennel - front-end
+* Habib Adam - game-engine, database structure
 
 ## Other info:
 
