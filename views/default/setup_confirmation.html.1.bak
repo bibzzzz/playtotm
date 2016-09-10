@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+<h1>Confirm the game setup.</h1>
+<h3>
+    The players are:
+</h3>
+<h2>
+    <img src="{{=session.player_avatars[answer_player]}}" alt="rest" />
+    {{=answer_player}}
+</h2>
+{{=BEAUTIFY(response._vars)}}

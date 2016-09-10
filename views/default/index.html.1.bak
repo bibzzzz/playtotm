@@ -1,0 +1,15 @@
+{{extend layout.html}}
+<body>
+    
+    <h1>
+    Game setup:
+    </h1>
+    <b>Note: </b>enter player names seperated by commas (eg. Kanye, Hillary Clinton, Bender, Jamal Crawford)
+    <br><br>
+    {{=form}}
+    </h2>
+        <input type=button onClick="location.href='../gamename'" value='click here to play a new game'>
+        <br>
+        <h2>
+</body>    
+</html>

@@ -1,0 +1,34 @@
+{{extend 'layout.html'}}
+<h1>FAQ</h1>
+
+<h4>
+    <br> What is autocomplete?
+</h4>
+<body>
+    <div align=center>
+    <img src="../static/images/autocomplete_example.png" alt="rest" align="middle"/>
+    </div>
+    When you type into a modern search box, those magical suggestions that appear below are referred to as autocomplete, or autocomplete suggestions. These results that drop down are based on of similar searches typed before by Google users or from elsewhere on the web. The predictions are a result of Google’s algorithm which uses numerous criteria to choose answers, including popularity. 
+</body>
+
+<h4>
+    <br> Why does it ask for "search engine location"?
+</h4>
+<body>
+    Because Google currently have separate domains for each country, the autocomplete suggestions are biased to each regions population. Users in the UK for example may be searching for “Lady Gaga’s favourite chips” whereas those in the US may be searching for “Lady Gaga’s favorite fries.” The cultural context can influence the popularity of various search terms as well as choosing search terms for your friends.
+</body>
+
+<h4>
+    <br> What is a round?
+</h4>
+<body>
+    A round is defined as the number of questions that each player will pose. For example, a 2 round game will require that each player submits 2 search terms. 
+</body>
+
+<h4>
+    <br> Is “safe search” enabled?
+</h4>
+<body>
+   Yes. Some of you may have noticed that “explicit” terms do not currently produce any results. This is due to the Google autocomplete algorithm, and for more information on this, visit: <a href="https://support.google.com/websearch/answer/106230?hl=en">Suggestions Info</a>.
+</body>
+{{=BEAUTIFY(response._vars)}}

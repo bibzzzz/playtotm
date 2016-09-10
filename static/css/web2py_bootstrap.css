@@ -1,0 +1,641 @@
+/*=============================================================
+                       CUSTOM RULES
+==============================================================*/
+
+@font-face {
+	font-family: 'Lato';
+	src: url(https://fonts.googleapis.com/css?family=Lato:100,400);
+}
+
+body{
+	background: url('../images/animated_bg_graph_sml.gif'); /*https://unsplash.it/1920/1080/?random&element=body&gravity=center&image=302*/
+    /*background-size: 2560px	1440px;*/
+    background-repeat: repeat;
+    height:auto; /* to avoid vertical scroll bar */
+    /*font: 100 1em/1.5em 'Lato', sans-serif; , sans-serif; Arial; HelveticaNeue-Light; */
+	font: 100 'Lato', sans-serif;
+	font-weight: 200;
+    color: #000;
+    letter-spacing:2px;
+}
+
+table{
+    position: relative;
+    vertical-align: middle;
+}
+
+.imgflag{
+    border:solid;
+    border-width: 1px;
+    border-color: transparent;
+}
+
+.roundedxsmall {
+        /*-webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        filter: gray;
+        filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale"); */
+        filter: grayscale(100%);
+        width:30px;
+        overflow:hidden;
+        height:30px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+}
+
+.roundedsmall {
+       /* -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        filter: gray;
+        filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+        filter: grayscale(100%); */
+        width:55px;
+        margin: 7px 7px 7px 7px;
+        overflow:hidden;
+        height:55px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+}
+
+.roundedsmallbw {
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        filter: gray;
+        filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+        filter: grayscale(100%);
+        width:85px;
+        overflow:hidden;
+        height:85px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+}
+.wordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
+    overflow:hidden;
+}
+
+.roundedmed {
+    width:105px;
+    overflow:hidden;
+    height:105px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.roundedbig {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: gray;
+    filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+    filter: grayscale(100%);
+    width:195px;
+    overflow:hidden;
+    height:195px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.roundedxbig {
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        filter: gray;
+        filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+        filter: grayscale(100%);
+        min-width:200px;
+        width:400px;
+        max-width:425px;
+        overflow:hidden;
+        max-height:425px;
+        height:400px;
+        min-height:200px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+}
+
+.shadowed {
+-webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+filter: url(shadow.svg#drop-shadow);
+-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12,
+Color='#444')";
+filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+#container {
+  min-height: 40px;
+  text-align: center;
+  border: 1px transparent;
+  font-size: 0.1px; /* IE 9/10 don't like font-size: 0; */
+  min-width: 80px;
+  vertical-align: middle;
+  width:100%;
+  overflow: hidden;
+
+}
+#container div3 {
+  width: 32%;
+  height: 100%;
+  display: inline-block;
+  background: transparent;
+  font-size: 48px;
+  text-align: center;
+  vertical-align: top;
+  margin: 0px auto 0px auto;
+  min-width: 30px;
+
+
+}
+
+#container div2 {
+  width: 59.8%;
+  height: 100%;
+  display: inline-block;
+  background: transparent;
+  font-size: 48px;
+  text-align: center;
+  vertical-align: middle;
+  min-width: 40px;
+
+}
+
+#container divcenteritall {
+  width: 49.8%;
+  height: 100%;
+  display: inline-block;
+  background: transparent;
+  text-align: center;
+  vertical-align: middle;
+  min-width: 40px;
+
+}
+
+#container div1 {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: transparent;
+  font-size: 48px;
+  text-align: center;
+  vertical-align: middle;
+  min-width: 40px;
+
+}
+
+#container divlong {
+  width: 100%;
+  height: 200%;
+  display: inline-block;
+  background: transparent;
+  font-size: 48px;
+  text-align: center;
+  vertical-align: middle;
+  min-width: 40px;
+}
+
+p.center {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  background: blue;
+  text-align:center;
+  min-width: 40px;
+}
+
+#container:after {
+  content: ' ';
+  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+  display: inline-block;
+}
+
+.scorelabel{
+    position:absolute;
+    top:-15px;
+    left:20px;
+    margin:0;
+    padding:0 5px;
+    line-height:25px;
+    background: #00ff00;
+    border:1px solid #000000;
+}
+.scorecontainer{
+    position:relative;
+    float:left;
+    width:300px;
+    border: 1px solid #000000;
+    margin:20px;
+    background:#ffffcc;
+    display:inline;
+}
+.content {
+    padding: 5px;
+    margin: 10px 0 0 0;
+}
+
+.threebythreecontainer{
+  float: left;
+  clear: left;
+  width: 99.9%;
+
+}
+
+.left {
+  float: left;
+  width: 33%;
+  border: 1px solid;
+    border-color:transparent
+}
+
+.shadowbox_top {
+  border-top:1px solid #CCCCCC;
+  border-left:1px solid #CCCCCC;
+  border-right:1px solid #CCCCCC;
+  font-size: 0px;
+  /* set height and margin-right at the same value */
+  height: 4px;
+  margin-right: 4px;
+}
+
+.shadowbox_content {
+  padding-top: 3px;
+  border-left: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+  padding-bottom:10px;
+  overflow: hidden;
+  padding-left: 11px;
+  text-align: left;
+  /* set border-right = margin-right + 1 */
+  border-right: 5px solid #CCCCCC;
+}
+.shadowbox_bottom{
+  font-size: 0px;
+  background-color: #CCCCCC;
+  /* set height and margin-left at the same value as margin-right */
+  height: 4px;
+  margin-left: 4px;
+}
+}
+
+.columnsetup
+ {
+  margin-left:-9px;
+  padding-left:9px;
+ }
+
+.mainbox1
+ {
+  margin:0px 2px;
+  overflow: hidden;
+  font-size:1px;
+  height:1px;
+ }
+
+.mainbox2
+ {
+  margin:0px 1px;
+  overflow: hidden;
+  font-size:1px;
+  height:1px;
+ }
+
+.mainbox3
+ {
+  margin:0px auto;
+  overflow: hidden;
+  font-size:1px;
+  height:1px;
+ }
+
+/* We can change all colors */
+
+.mainboxcolor1
+ {
+  border-left:1px solid #008000;
+  border-right:1px solid #008000;
+ }
+
+.mainboxcolor2 {background-color: #008000;}
+
+.mainboxcolor3
+ {
+  border-left: 1px solid #008000;
+  border-right: 1px solid #008000;
+ }
+
+/* end colors */
+
+.mainboxtext
+ {
+  padding: 2px 9px;
+  white-space:nowrap
+ }
+
+.block_title
+ {
+  position: relative;
+  top: -0.75em;
+  margin: 0 0 5px 0;
+  text-align: center;
+  font-size: 1.6em;
+  border: 0 ! important;
+ }
+
+.block_title strong {
+  padding: 0 8px;
+  color: #008000;           /* Title color */
+  background-color: #fff;   /* Title background color */
+  font-weight: normal ! important;
+ }
+
+.gameboxright {
+  float: right;
+  margin: 0 0 1em 1em;
+}
+
+.gameboxleft {
+  float: left;
+  margin: 0 0 1em 1em;
+}
+
+h1, h2, h3, h4, h5 {
+    color:#000;
+    letter-spacing:2px;}
+    font-family:futura;
+
+a{}
+a:visited{}
+a:hover{}
+a:focus{}
+a:active{}
+
+h1{}
+h2{}
+h3{}
+h4{}
+h5{}
+h6{}
+
+div.flash.flash-center{left:25%;right:25%;}
+div.flash.flash-top,div.flash.flash-top:hover{
+  position:relative;
+  display:block;
+  margin:0;
+  padding:1em;
+  top:20;
+  left:20;
+  width:100%;
+  text-align:center;
+  text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);
+  color:#865100;
+  background:#FFA500;
+  border:1px solid;
+  border-top:0px;
+  border-left:0px;
+  border-right:0px;
+  border-radius:0;
+  opacity:1;
+}
+#header{margin-top:5px;}
+.mastheader h1 {width:100%;
+  margin-bottom:0px;
+  margin-top:0px;
+  text-align:center;
+  font-size:71px;
+  color:#000;
+  font-weight:200;
+  letter-spacing:7px;
+  line-height:1;
+
+}
+.mastheader small {width:100%;
+  text-align:center;
+  font-size:20px;
+  color:#000;
+  font-weight:100;
+  letter-spacing:3px;
+  margin-bottom:-9px;
+
+}
+/* auth navbar - primitive style */
+.auth_navbar,.auth_navbar a{color:inherit;}
+.navbar-inner {-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
+.ie-lte7 .auth_navbar,.auth_navbar a{color:expression(this.parentNode.currentStyle['color']); /* ie7 doesn't support inherit */}
+.auth_navbar a{white-space:nowrap;} /* to avoid the nav split on more lines */
+.auth_navbar a:hover{color:white;text-decoration:none;}
+ul#navbar>.auth_navbar{
+  display:inline-block;
+  padding:2px;
+}
+/* form errors message box customization */
+div.error_wrapper{ margin-bottom:9px;}
+div.error_wrapper .error{
+    letter-spacing: 1px;
+  border-radius: 4px;
+  -o-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+/* below rules are only for formstyle = bootstrap
+trying to make errors look like bootstrap ones */
+div.controls .error_wrapper{
+  display:inline-block;
+  margin-bottom:0;
+  vertical-align:middle;
+}
+div.controls .error{
+  min-width:5px;
+  background:inherit;
+  color:#B94A48;
+  border:none;
+  padding:0;
+  margin:0;
+  /*display:inline;*/ /* uncommenting this, the animation effect is lost */
+}
+div.controls .help-inline{color:#3A87AD;}
+div.controls .error_wrapper +.help-inline {margin-left:-99999px;}
+div.controls select +.error_wrapper {margin-left:5px;}
+.ie-lte7 div.error{color:#fff;}
+
+/* beautify brand */
+.navbar {margin-bottom:0}
+.navbar-inverse .brand{color:#c6cecc;}
+.navbar-inverse .brand b{display:inline-block;margin-top:-1px;}
+.navbar-inverse .brand b>span{font-size:22px;color:white}
+.navbar-inverse .brand:hover b>span{color:white}
+
+/*=============================================================
+                 OVERRIDING WEB2PY.CSS RULES
+==============================================================*/
+
+/* reset to default */
+a{white-space:normal;}
+li{margin-bottom:1;}
+textarea,button{display:block;}
+/*reset ul padding */
+ul#navbar{padding:0;}
+/* label aligned to related input */
+td.w2p_fl,td.w2p_fc {padding:0;}
+#web2py_user_form td{vertical-align:middle;}
+
+/*=============================================================
+                 OVERRIDING BOOTSTRAP.CSS RULES
+==============================================================*/
+
+/* because web2py handles this via js */
+textarea { width:90%}
+.hidden{visibility:visible;}
+/* right folder for bootstrap black images/icons */
+[class^="icon-"],[class*=" icon-"]{
+  background-image:url("../images/glyphicons-halflings.png")
+}
+/* right folder for bootstrap white images/icons */
+.icon-white,
+.nav-tabs > .active > a > [class^="icon-"],
+.nav-tabs > .active > a > [class*=" icon-"],
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"] {
+  background-image:url("../images/glyphicons-halflings-white.png");
+}
+/* bootstrap has a label as input's wrapper while web2py has a div */
+div>input[type="radio"],div>input[type="checkbox"]{margin:0;}
+/* bootstrap has button instead of input */
+input[type="button"], input[type="submit"]{margin-right:8px;}
+
+/* web2py radio widget adjustment */
+.generic-widget input[type='radio'] {margin:-1px 0 0 0; vertical-align: middle;}
+.generic-widget input[type='radio'] + label {display:inline-block; margin:0 0 0 6px; vertical-align: middle;}
+
+/*=============================================================
+RULES FOR SOLVING CONFLICTS BETWEEN WEB2PY.CSS AND BOOTSTRAP.CSS
+==============================================================*/
+
+/*when formstyle=table3cols*/
+tr#auth_user_remember__row>td.w2p_fw>div{padding-bottom:8px;}
+td.w2p_fw div>label{vertical-align:middle;}
+td.w2p_fc {padding-bottom:0px;}
+/*when formstyle=divs*/
+div#auth_user_remember__row{margin-top:4px;}
+div#auth_user_remember__row>.w2p_fl{display:none;}
+div#auth_user_remember__row>.w2p_fw{min-height:39px;}
+div.w2p_fw,div.w2p_fc{
+  display:inline-block;
+  vertical-align:middle;
+  margin-bottom:0;
+}
+div.w2p_fc{
+  padding-left:5px;
+  margin-top:-8px;
+}
+/*when formstyle=ul*/
+form>ul{
+  list-style:none;
+  margin:0;
+}
+li#auth_user_remember__row{margin-top:4px;}
+li#auth_user_remember__row>.w2p_fl{display:none;}
+li#auth_user_remember__row>.w2p_fw{min-height:39px;}
+/*when formstyle=bootstrap*/
+#auth_user_remember__row  label.checkbox{display:block;}
+span.inline-help{display:inline-block;}
+input[type="text"].input-xlarge,input[type="password"].input-xlarge{width:270px;}
+/*when recaptcha is used*/
+#recaptcha{min-height:30px;display:inline-block;margin-bottom:0;line-height:30px;vertical-align:middle;}
+td>#recaptcha{margin-bottom:6px;}
+div>#recaptcha{margin-bottom:9px;}
+div.control-group.error{
+width:auto;
+background:transparent;
+border:0;
+color:inherit;
+padding:0;
+background-repeat:repeat;
+}
+
+/*=============================================================
+                       OTHER RULES
+==============================================================*/
+
+/* Massimo Di Pierro fixed alignment in forms with list:string */
+form table tr{margin-bottom:9px;}
+td.w2p_fw ul{margin-left:0px;}
+
+/* web2py_console in grid and smartgrid */
+.hidden{visibility:visible;}
+.web2py_console input{
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.web2py_console input[type="submit"],
+.web2py_console input[type="button"],
+.web2py_console button{
+  padding-top:4px;
+  padding-bottom:4px;
+  margin:3px 0 0 2px;
+}
+.web2py_console a,
+.web2py_console select,
+.web2py_console input
+{
+  margin:3px 0 0 2px;
+}
+.web2py_grid form table{width:auto;}
+/* auth_user_remember checkbox extrapadding in IE fix */
+.ie-lte9 input#auth_user_remember.checkbox {padding-left:0;}
+
+div.controls .error {
+    width: auto;
+}
+
+/*=============================================================
+                       MEDIA QUERIES
+==============================================================*/
+
+@media only screen and (max-width:979px){
+  body{padding-top:0px;}
+  #navbar{/*top:5px;*/}
+  div.flash{top:35px;right:25%; left:25%; text-align:center}
+  .dropdown-menu ul{visibility:visible;}
+}
+
+@media only screen and (max-width:3000px){
+  body{
+    padding-left:-10px;
+    padding-right:-10px;
+  }
+    div.flash{top:35px; right:25%; left:25%; text-align:center; color:#FFF; background:#FFA500}
+  .navbar-fixed-top,.navbar-fixed-bottom {
+
+  }
+  input[type="text"],input[type="password"],select{
+    width: 100%
+    padding: 0px 6px;
+    min-height: 29px;
+    max-height: 29px;
+  }
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        margin-right: -20px;
+        margin-left: -20px;
+        min-height: 30px;
+        max-height: 30px;
+    }
+}

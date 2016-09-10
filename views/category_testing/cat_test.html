@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+
+
+{{=SQLTABLE(session.rows,
+     headers='fieldname:capitalize',
+     truncate=100,
+     upload=URL('download'))
+}}
+
+{{=session.recat_dict['1995 film']}}

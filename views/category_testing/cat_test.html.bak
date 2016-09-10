@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+
+
+{{=SQLTABLE(session.rows,
+     headers='fieldname:capitalize',
+     truncate=100,
+     upload=URL('download'))
+}}

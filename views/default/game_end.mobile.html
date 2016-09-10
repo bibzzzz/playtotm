@@ -1,0 +1,94 @@
+{{extend 'layout3nohead.html'}}
+    <body>
+        {{session.game_completed = 1}}
+       <div align="center">
+
+            <h1>
+                {{i=1}}
+                {{for item in session.ordered_game_totals:}}
+                    {{if item[1]==session.max_score:}}
+                        {{if i > 1:}}
+                            + {{=item[0]}}
+                        {{else:}}
+                            {{=item[0]}}
+                        {{pass}}
+                        
+                        {{i += 1}}
+                    {{pass}}
+                    
+                {{pass}}
+                    
+                {{if i == 2:}}
+                        WINS!
+                {{else:}}
+                    TIE!
+                {{pass}}
+		   </h1>
+		   		   {{if len(session.playerlist)>1:}}
+				Collectively you guys scored higher than 
+			   {{if session.group_score==max(session.past_group_scores):}}
+					100%
+			   {{else:}}
+					{{=session.group_percentile_score}}%
+			   {{pass}}
+				   of other groups in similar games in <img class="imgflag" src="{{=session.engine_flag_url}}">
+		  {{else:}}
+			  You scored higher than 
+			   {{if session.group_score==max(session.past_group_scores):}}
+					100%
+			   {{else:}}
+					{{=session.group_percentile_score}}%
+			   {{pass}}
+				   of other single player games in <img class="imgflag" src="{{=session.engine_flag_url}}">
+	    {{pass}}
+           </div>
+        
+<div id="container" style="width: 50%;
+margin: 0px auto 0px auto;">
+    {{for item in session.ordered_game_totals:}}
+    <div3 align=center style="width: 85px; margin: 2px 2px 2px 2px;">
+        <div align=center style="width: 85px;">
+                            {{if item[1]==session.max_score:}}
+                <img class="roundedsmall" 
+                     src="{{=session.player_avatars[item[0]]}}"> 
+                </img>
+                {{else:}}
+                <img class="roundedsmall" 
+                     src="{{=session.loser_avatar_url}}"> 
+                </img>
+                {{pass}}
+                <div class="center" style=" font-size: 12px; max-width: 85px; word-wrap: break-word;">
+                            {{=item[0]}}<br><b>{{=item[1]}} POINTS</b>
+                </div>
+        </div>
+    </div3>
+    {{pass}}
+</div>
+        
+
+       <div align="center">
+		   <input type=button class="btn btn-primary btn-lg" onClick="location.href='../'" value='Play Again!'>
+       </div>
+<div style=" margin-right:2%; margin-left:2%; margin-top:20px">
+    
+    <div align="center">
+        <h3>
+        Game Recap: 
+    </h3>
+    </div>
+    {{for item in session.round_history:}}
+    <h4>
+        <i>
+            {{=item}}...
+        </i>
+    </h4>
+    {{for entry in session.round_history[item][0]:}}  
+    <b>
+        <div style="float:left; height:40px; padding:6px;"> <img class="roundedxsmall" src="{{=session.player_avatars[entry]}}" alt="rest" align="middle"/></div>{{=entry}}: 
+    </b><div style=" min-height:10px; padding:1px;">
+    {{=session.round_history[item][1][entry]}} - {{=session.round_history[item][0][entry]}} POINTS
+    </div><br>
+    {{pass}}
+    {{pass}}
+</div>
+    </body>

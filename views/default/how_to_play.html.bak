@@ -1,0 +1,66 @@
+{{extend 'layout.html'}}
+<h2>How to Play:</h2>
+
+    <body>
+
+        <br> <h4>
+        TOTM can be broken down into 5 simple steps: 
+        </h4>
+
+        1. Provide the names of the players (up to 10), the number of rounds you would like to play (up to 10), and select your region from the available list. <br>
+        2. A player will be selected to create and submit a search-term for the other players to try and complete. <br>
+        3. The other players take turns guessing the most common Google autocomplete suggestions. <br>
+        4. Scores for players and all suggestions are presented after all players have made their selections. Points are based on the popularity of search terms chosen, with the most popular search terms scoring highest. <br>
+        5. Steps 2 to 4 are repeated until all players have been given the chance to submit the required number of search terms (as defined by the number of rounds selected). <br>
+    </body>
+
+<h4>
+    <br> What is a round?
+</h4>
+<body>
+    A round is defined as the number of questions that each player will pose. For example, a 2 round game will require that each player submits 2 search terms. 
+</body>
+
+<h4>
+    <br> Why does it ask for "search engine location"?
+</h4>
+<body>
+    Because Google currently have separate domains for each country, the autocomplete suggestions are biased to each regions population. Users in the UK for example may be searching for “Lady Gaga’s favourite chips” whereas those in the US may be searching for “Lady Gaga’s favorite fries.” The cultural context can influence the popularity of various search terms as well as choosing search terms for your friends.
+</body>
+
+
+<h4>
+    <p>
+        <br> A note about scoring:
+    </p>
+</h4>
+    <p>
+        Only searches that provide a minimum of 10 autocomplete suggestions are accepted. If a search is too specific the ‘Searchmaster’ will be prompted to submit a new search term. The top 10 suggestions are then randomised and presented for players to choose from. The score assigned to an answer is directly linked to its rank i.e. the most popular suggestion scores 10 points, while the least popular suggestion scores 1 point. Points also carry over into each round, and the player with the highest score at the end of the final round is the winner.
+    </p>
+<h4>
+    <p>
+        <br> A note about images:
+    </p>
+</h4>
+    <p>
+    When the game is setup, players are assigned an avatar for the game, like a player profile picture. These images are chosen at random from the top <a href="http://google.com/images">Google Images</a> results for the name given. Below are some example player avatars: </p><br>    
+    
+<div id="container" style="width: 50%;
+margin: 0px auto 0px auto;">
+    {{for player in player_avatars:}}
+    <div3 align=center style="width: 85px; margin: 2px 2px 2px 2px;">
+        <div align=center style="width: 85px;">
+            <img class="roundedsmall" src="{{=player_avatars[player]}}">
+                <div class="center" style=" font-size: 12px; max-width: 85px; word-wrap: break-word;">
+                            {{=player}}
+                </div>
+            </div>
+        </div3>
+    {{pass}}
+    </div>
+
+    <p>
+        Images are also presented during the game for each search term that is submitted, and these are also the result of choosing a top Google Images result at random for the search term that has been posed.
+    </p>
+
+</body>

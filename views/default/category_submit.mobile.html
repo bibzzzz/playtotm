@@ -1,0 +1,41 @@
+{{extend 'layout.nohead.mobile.html'}}
+<div style="max-width:400px; margin: 0px auto;">
+    <div class="left" style="width:100%; font-size:10px;">
+        <div class="gameboxleft">
+                <div class=center style="font-size: 10px; max-width: 120px; word-wrap: break-word;">
+				<img class="roundedsmall" src="{{=session.player_avatars[session.q_master]}}" alt="rest"/>
+					<div>
+						{{=session.q_master}}
+						<br>
+							({{=session.user_total_scores[session.q_master]}} PTS)
+					</div>
+				</div>
+        </div>
+
+        <div  class="gameboxright" style="width:140px; height: 20px; margin-right: -30px;">
+            <div class=center style=" font-size: 10px; max-width: 120px; word-wrap: break-word;">
+                <body>
+					<br>Location: <img class="imgflag" src="{{=session.engine_flag_url}}"> <br>
+					{{if (1 + session.number_of_rounds*len(session.playerlist) - session.game_round_count) == 1:}}
+					<b>FINAL TURN</b>
+					{{else:}}
+					{{=1 + session.number_of_rounds*len(session.playerlist) - session.game_round_count}} turns remaining
+					{{pass}} <br>
+				</body>
+            </div>
+        </div>
+        
+    </div>
+
+   <div align=center style ="width:100%">
+	<div style=" text-align: left; width: 255px; margin: 0 auto;">
+		<b><span style="color: #c20">{{=session.q_master}}</span></b>, select a category:<br><br>
+		<div class="row" style="max-width: 260px; margin-left: auto ;  margin-right: auto ;">
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='../generate_category_question?category={{=session.category_list[0]}}';">{{=session.category_list[0]}}</button><br>
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='../generate_category_question?category={{=session.category_list[1]}}';">{{=session.category_list[1]}}</button><br>
+		<button type="button" class="btn btn-info btn-lg btn-block" onclick="location.href='../generate_category_question?category=Random';">Random</button><br>
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='../generate_category_question?category={{=session.category_list[2]}}';">{{=session.category_list[2]}}</button><br>
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='../generate_category_question?category={{=session.category_list[3]}}';">{{=session.category_list[3]}}</button>
+	</div>
+	   
+</div>

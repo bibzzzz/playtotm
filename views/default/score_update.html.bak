@@ -1,0 +1,44 @@
+{{extend 'layout.html'}}
+
+<body>
+
+<div align=center style="font-size:20px; line-height: 23px;">
+    <h2 style="font-size:25px;font-weight:200;margin:0;padding:25;">Top
+		<img class="imgflag" src="{{=session.engine_flag_url}}"> searches for
+		<br>
+        <i>"{{=session.search_term.lower()}}..." </i>
+    </h2><br>
+    {{for item in sorted_answers:}}
+    {{if item[1] in [session.user_round_answers[x] for x in session.user_round_answers]:}}
+    <b>
+       <img class="roundedxsmall" src="{{=session.player_avatars[session.inv_user_round_answers[item[1]]]}}" alt="rest" align="middle"/> <a href="{{=answer_link_array[item[0]]}}" target = "_blank">{{=item[1]}}</a> (+{{=item[0]}})<br>
+    </b>
+    {{else:}}
+    <a href="{{=answer_link_array[item[0]]}}" target = "_blank">{{=item[1]}}
+	</a> (+{{=item[0]}})<br>
+    {{pass}}
+    {{pass}}
+</div><br>
+
+	<div id="container">
+		<div2 style ="margin-top:20px; width:100%; -ms-transform: scale(1.3,1.3);-webkit-transform: scale(1.3,1.3); transform: scale(1.3,1.3);">
+            <input type=button autofocus class="btn btn-primary btn-lg" onClick="location.href='../totm_dev/{{=session.sts}}'" value='Continue'>
+		</div2>
+	</div>
+	
+		<div align=center style="font-size:25px;margin-top:25px">
+			Leader Board<br><br>
+			<div style="line-height: 45px;font-size:16px;">
+				{{for item in session.ordered_game_totals:}}
+				<div>
+					<img class="roundedxsmall" src="{{=session.player_avatars[item[0]]}}"> {{=item[0]}} - <b>{{=item[1]}} POINTS
+					</b>
+				</div>
+				{{pass}}
+				<br>
+			</div>
+			<div style="font-size:25px;">Search Term History<br>
+			</div>
+			<iframe scrolling="no" style="border:none;" width="500" height="325" src="https://www.google.com/trends/fetchComponent?geo={{=session.geo_code}}&q={{if session.game_mode=='Trivia':}}{{=session.cat_trend}}{{else:}}{{=session.search_term}}{{pass}}&cid=TIMESERIES_GRAPH_0&export=5" seamless></iframe>
+
+		</body>

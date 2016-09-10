@@ -1,0 +1,2 @@
+<h1>This is the default/get_category.html template</h1>
+{{=BEAUTIFY(response._vars)}}

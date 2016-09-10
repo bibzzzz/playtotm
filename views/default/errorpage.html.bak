@@ -1,0 +1,21 @@
+{{extend 'layout2.html'}}
+
+<div align=center><img class="roundedmed" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS2XJ60cRDJ68EW5dM8QYexLyDvzAxrsZYrqGhh5lwov8_jZu_6" alt="rest" /> <br>
+<h3>Well this is awkward... it seems we messed something up. It's likely that either:</h3>
+<h4>
+	our databases are being updated (try restarting your game in a couple of minutes time) <br>
+	OR we couldn't find enough results for your query (retry search) <br>
+	OR we're having server issues (come back later)
+	</h4>
+	
+	
+	       <div align=center style ="margin-top:20px; margin-bottom:20px; width:100%; -ms-transform: scale(1.3,1.3);-webkit-transform: scale(1.3,1.3); transform: scale(1.3,1.3);">
+           <input type=button class="btn btn-primary btn-lg" onClick="location.href='../totm_dev'" value='Restart Game'>
+	<input type=button class="btn btn-primary btn-lg" onclick="goBack()" value='Retry'></input>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+	</div>
+</div>

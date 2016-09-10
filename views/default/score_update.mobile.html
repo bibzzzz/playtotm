@@ -1,0 +1,49 @@
+{{extend 'layout.nohead.mobile.html'}}
+
+<body>
+
+
+	<div align=center>    
+		<h3 style="margin:0;padding:25;">Top 
+			<img class="imgflag" src="{{=session.engine_flag_url}}"> searches for 
+			<br>
+			<i>
+				{{=session.search_term}}...
+			</i>
+		</h3>
+		{{for item in sorted_answers:}}
+		{{if item[1] in [session.user_round_answers[x] for x in session.user_round_answers]:}}
+		<h4>
+			<img class="roundedxsmall" src="{{=session.player_avatars[session.inv_user_round_answers[item[1]]]}}" alt="rest" align="middle"/> <a href="{{=answer_link_array[item[0]]}}" target = "_blank">{{=item[1]}}</a> (+{{=item[0]}})
+		</h4>
+		{{else:}}
+		<a href="{{=answer_link_array[item[0]]}}" target = "_blank">{{=item[1]}}
+		</a> (+{{=item[0]}})<br>
+		{{pass}}
+		{{pass}}
+	</div>
+	<br>
+
+	<div id="container">
+		<input type=button class="btn btn-primary btn-lg" onClick="location.href='../{{=session.sts}}'" value='Continue'>
+	</div>
+
+	<div align=center style="font-size:15px;"><br>
+		<div style="font-size:15px;">
+			Leader Board
+		</div>
+		<div style=" line-height: 35px;">
+			{{for item in session.ordered_game_totals:}}
+			<div>
+				<img class="roundedxsmall" src="{{=session.player_avatars[item[0]]}}"> {{=item[0]}} - <b>{{=item[1]}} POINTS
+				</b>
+			</div>
+			{{pass}}
+			<br>
+		</div>
+		
+		Search Term History
+			<iframe scrolling="no" style="border:none;" frameborder="1" marginheight="1px" marginwidth="1px" height=300px width="100%" src="https://www.google.com/trends/fetchComponent?geo={{=session.geo_code}}&q=
+    {{=session.search_term}}&cid=TIMESERIES_GRAPH_0&export=5&w=300&h=200"></iframe>
+	</div>
+</body>

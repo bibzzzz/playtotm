@@ -1,0 +1,37 @@
+{{extend 'layout3nohead.html'}}
+<div style="max-width:400px; margin: 0px auto;">
+    
+    <div class="left" style="width:100%; font-size:10px;">
+        <div class="gameboxleft">
+            <body>
+                Location: <img class="imgflag" src="{{=session.engine_flag_url}}"> <br>
+                {{if session.game_round_count%len(session.playerlist)==0:}}
+                Round: {{=session.game_round_count/len(session.playerlist)}} of {{=session.number_of_rounds}} <br>
+                Question: {{=len(session.playerlist)}} of {{=len(session.playerlist)}} <br>
+                {{else:}}
+                Round: {{=(session.game_round_count/len(session.playerlist))+1}} of {{=session.number_of_rounds}} <br>
+                Question: {{=session.game_round_count%len(session.playerlist)}} of {{=len(session.playerlist)}} <br>
+                {{pass}} <br>
+            </body>
+        </div>
+
+        <div class="left" class="gameboxright" style="width:140px; height: 110px; margin-right: -15px;">
+            <div class=center style=" font-size: 10px; max-width: 120px; word-wrap: break-word;">
+                <div class="label" style="font-size:9px;">
+                    ACTIVE PLAYER
+                </div>
+                <img class="roundedsmall" src="{{=session.player_avatars[session.q_master]}}" alt="rest"/>
+                <div style="margin: -8px; line-height:14px;">
+                    {{=session.q_master}}<br>
+                    <b>{{=session.user_total_scores[session.q_master]}} PTS</b>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div align=center style ="width:100%;">
+        <img class="roundedsmallbw" src="../static/images/questiontime.png" alt="rest" align="middle"/>
+        {{=form}}
+    </div>
+</div>

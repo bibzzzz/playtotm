@@ -1,0 +1,302 @@
+# coding: utf8
+# try something like
+
+def index():
+    import uuid
+    import urllib2
+    import simplejson
+    import random
+
+    session.game_id = str(uuid.uuid4())
+    #response.flash = 'Configure your game!'
+
+    #engine_dict = {'http://google.com/complete/search?output=toolbar&q=':'US',
+    #                                                          'http://google.com.au/complete/search?output=toolbar&q=':'AU',
+    #                                                          'http://google.co.uk/complete/search?output=toolbar&q=':'UK',
+    #                                                          'http://google.co.it/complete/search?output=toolbar&q=':'IT',
+    #                                                          'http://google.co.br/complete/search?output=toolbar&q=':'BR',
+    #                                                          'http://google.co.jp/complete/search?output=toolbar&q=':'JP'}
+
+    engine_dict = {'http://google.com/complete/search?output=toolbar&q=':'US',
+                   'http://google.co.uk/complete/search?output=toolbar&q=':'UK',
+                   'http://google.co.jp/complete/search?output=toolbar&q=':'JP',
+                   }
+
+    form = SQLFORM.factory(Field('player_names',requires=IS_NOT_EMPTY(error_message=T("You can't play with yourself, here at least"))),
+                           Field('number_of_rounds',requires=[IS_NOT_EMPTY(error_message=T('Tell us how many rounds you want to play')),IS_INT_IN_RANGE(1,11,error_message=T('Enter a number between 1 and 10'))]),
+                           Field('search_engine_location',requires=IS_IN_SET(engine_dict,error_message=T('Select a search engine region')))).process()
+
+    if form.accepted:
+
+        session.number_of_rounds = form.vars.number_of_rounds
+        session.player_names = form.vars.player_names
+        session.playerlist = list(map(str,form.vars.player_names.split(',')))
+
+        if len(session.playerlist)!=len(set(session.playerlist)):
+            session.flash = 'Come on now... each name must be unique!'
+            redirect(URL('index'))
+        if len(session.playerlist) <= 1:
+            session.flash = 'Please enter player names seperated by commas (eg. Kanye, Hillary Clinton, Zoidberg, ...)'
+            redirect(URL('index'))
+        else:
+            session.player_avatars = {}
+            for player in session.playerlist:
+                searchUrl = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + player
+                #+ '&imgc=gray'
+                f = urllib2.urlopen(searchUrl)
+                gi_results = simplejson.load(f)
+                n_avatar_options = len(gi_results['responseData']['results'])
+                if n_avatar_options >= 1:
+                    avatar_index = random.randint(0,(n_avatar_options-1))
+                    image_url = gi_results['responseData']['results'][avatar_index]['tbUrl']
+                    adj_image_url = image_url.replace('\u003d', '=')
+                    session.player_avatars[player] = adj_image_url
+                else:
+                    session.player_avatars[player] = 'http://t2.gstatic.com/images?q=tbn:ANd9GcTZCfo94FDKNkVU2Q3WKGbdmjQxF8KiOQXteN7YbFyHU_uUSvrLqdCfJf2m-A'
+
+        session.engine = form.vars.search_engine_location
+        session.engine_code = engine_dict[form.vars.search_engine_location]
+        session.game_round_count = 1
+        session.round_history = {}
+        session.q_master_index = 0
+
+        #initialize total scores
+        session.user_total_scores = {}
+        for user in session.playerlist:
+            session.user_total_scores[user] = 0
+        #HERE IS WHERE WE STORE GAMES TO THE DB
+
+        redirect(URL('setup_confirmation'))
+    elif form.errors:
+        response.flash = 'You got issues!'
+        pass
+
+
+    return locals()
+
+def search_term_submit():
+
+    import urllib2
+    from xml.dom import minidom
+    import xml.etree.ElementTree
+    import random
+    import simplejson
+
+    session.q_master = session.playerlist[session.q_master_index]
+    session.a_playerlist = session.playerlist[(session.q_master_index+1):len(session.playerlist)] + session.playerlist[0:session.q_master_index]
+    form = SQLFORM.factory(Field('search_term',requires=IS_NOT_EMPTY(error_message=T('You gotta enter something, man!')))).process(message_onsuccess="Ain't nobody searching for that - try something less specific!",message_onfailure='I know you can do better than that!')
+    form.add_button("I'm Feeling Lucky",URL('generate_random_question'))
+
+    if form.accepted:
+
+        session.search_term = form.vars.search_term
+        session.round_count = 1
+        session.selected_answers = []
+        adj_search_term = request.vars.search_term.replace (" ", "+")
+        search_url = session.engine + adj_search_term + '+'
+        url_output = urllib2.urlopen(search_url)
+        xml_string = url_output.read()
+        xml_doc = minidom.parseString(xml_string)
+        suggestion_list = xml_doc.getElementsByTagName('CompleteSuggestion')
+        n_suggestions = len(suggestion_list)
+
+        if n_suggestions == 10:
+
+                pts_list = list(reversed(range(n_suggestions)))
+                suggestion_tree = xml.etree.ElementTree.fromstring(xml_string)
+
+                ordered_suggestion_list = list()
+                answer_list = {}
+
+                i = 10
+                for data in suggestion_tree.iter('suggestion'):
+                        suggestion = data.get('data')
+                        answer_list[i] = suggestion
+                        ordered_suggestion_list.append(suggestion)
+                        i -= 1
+
+                random_suggestion_list = sorted(ordered_suggestion_list, key=lambda k: random.random())
+
+                session.random_list = {}
+                i = 0
+                for item in random_suggestion_list:
+                    session.random_list[i] = item
+                    i += 1
+
+                if len(session.random_list) < 10:
+                    redirect(URL('search_term_submit'))
+                else:
+                    #STORE THE SEARCH TERMS TO THE DB
+                    db.search_term.insert(time_stamp = request.now, engine=session.engine, search_term=session.search_term)
+                    searchUrl = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + adj_search_term + '&imgc=gray'
+                    f = urllib2.urlopen(searchUrl)
+                    gi_results = simplejson.load(f)
+                    if len(gi_results['responseData']['results']) > 0:
+                        image_url = gi_results['responseData']['results'][0]['tbUrl']
+                        session.adj_image_url = image_url.replace('\u003d', '=')
+                        #pass
+                    else:
+                        session.adj_image_url = 'http://t2.gstatic.com/images?q=tbn:ANd9GcTZCfo94FDKNkVU2Q3WKGbdmjQxF8KiOQXteN7YbFyHU_uUSvrLqdCfJf2m-A'
+                    session.answer_list = answer_list
+                    session.player_answers = {}
+                    redirect(URL('search_term_execute',vars={'search_term':session.search_term}))
+    if session.game_round_count > len(session.playerlist)*session.number_of_rounds:
+        redirect(URL('game_end'))
+
+    return locals()
+
+def generate_random_question():
+    import urllib2
+    from xml.dom import minidom
+    import xml.etree.ElementTree
+    import random
+    import simplejson
+
+    #isolate search engine
+    #TODO NEED TO REMOVE ALREADY POSED SEARCHES (so users don't get a question they've already answered)
+    rows = db(db.search_term.engine==session.engine).select().sort(lambda row: random.random())
+    session.search_term = rows[0].search_term
+
+    session.round_count = 1
+    session.selected_answers = []
+    adj_search_term = session.search_term.replace (" ", "+")
+    search_url = session.engine + adj_search_term + '+'
+    url_output = urllib2.urlopen(search_url)
+    xml_string = url_output.read()
+    xml_doc = minidom.parseString(xml_string)
+    suggestion_list = xml_doc.getElementsByTagName('CompleteSuggestion')
+    n_suggestions = len(suggestion_list)
+
+    pts_list = list(reversed(range(n_suggestions)))
+    suggestion_tree = xml.etree.ElementTree.fromstring(xml_string)
+
+    ordered_suggestion_list = list()
+    answer_list = {}
+
+    i = 10
+    for data in suggestion_tree.iter('suggestion'):
+            suggestion = data.get('data')
+            answer_list[i] = suggestion
+            ordered_suggestion_list.append(suggestion)
+            i -= 1
+
+    random_suggestion_list = sorted(ordered_suggestion_list, key=lambda k: random.random())
+
+    session.random_list = {}
+    i = 0
+    for item in random_suggestion_list:
+        session.random_list[i] = item
+        i += 1
+
+    if len(session.random_list) < 10:
+        session.flash = 'Sorry, our bad... try again'
+        redirect(URL('search_term_submit'))
+    else:
+        #db.search_term.insert(time_stamp = request.now, engine=session.engine, search_term=session.search_term)
+        searchUrl = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + adj_search_term + '&imgc=gray'
+        f = urllib2.urlopen(searchUrl)
+        gi_results = simplejson.load(f)
+        if len(gi_results['responseData']['results']) > 0:
+            image_url = gi_results['responseData']['results'][0]['tbUrl']
+            session.adj_image_url = image_url.replace('\u003d', '=')
+        else:
+            session.adj_image_url = 'http://t2.gstatic.com/images?q=tbn:ANd9GcTZCfo94FDKNkVU2Q3WKGbdmjQxF8KiOQXteN7YbFyHU_uUSvrLqdCfJf2m-A'
+        session.answer_list = answer_list
+        session.player_answers = {}
+        #session.flash = 'Complete the search'
+        redirect(URL('search_term_execute',vars={'search_term':session.search_term}))
+
+    return locals()
+
+def image_store():
+    import urllib2
+    import simplejson
+    import cStringIO
+
+    #fetcher = urllib2.build_opener()
+    searchTerm = 'michael+jordan'
+    searchUrl = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + searchTerm + '&imgc=gray'
+    f = urllib2.urlopen(searchUrl)
+    gi_results = simplejson.load(f)
+    image_url = gi_results['responseData']['results'][0]['tbUrl']
+    #file = cStringIO.StringIO(urllib2.urlopen(image_url).read())
+    #img = Image.open(file)
+    adj_image_url = image_url.replace('\u003d', '=')
+    test = IMG(_src=URL(adj_image_url),_alt='test')
+    test2 = IMG(_src='http://t3.gstatic.com/images?q=tbn:ANd9GcQC8-5IHcAc4lc7deD7y4siuO37AixOAzSikpzM4OpGVVe5FdRnvPteA7c',_alt='test')
+    test3 = session.player_avatars
+    return locals()
+
+def search_term_execute():
+    import math
+
+    if session.round_count <= len(session.a_playerlist):
+        answer_player = session.a_playerlist[session.round_count - 1]
+
+    response.flash = 'Complete the search'
+    #remove already selected answers from answer_selection list
+    inverted_random_list = {v:k for k, v in session.random_list.items()}
+
+    for entry in session.selected_answers:
+        del inverted_random_list[entry]
+
+    filtered_random_list = {v:k for k, v in inverted_random_list.items()}
+
+    form = SQLFORM.factory(Field('answer_selection',requires=IS_IN_SET(filtered_random_list))).process()
+
+    if (form.accepted) & (session.round_count <= len(session.a_playerlist)):
+        session.round_count += 1
+        session.player_answers[answer_player] = filtered_random_list[int(form.vars.answer_selection)]
+        session.selected_answers.append(filtered_random_list[int(form.vars.answer_selection)])
+        redirect(URL('search_term_execute',vars={'search_term':session.search_term}))
+    elif session.round_count > len(session.a_playerlist):
+        if session.q_master_index == (len(session.playerlist) - 1):
+            session.q_master_index = 0
+        else:
+            session.q_master_index += 1
+
+        inv_answer_list = {v:k for k, v in session.answer_list.items()}
+        session.user_round_scores = {}
+        session.user_round_answers = {}
+        for user in session.a_playerlist:
+            user_round_answer = session.player_answers[user]
+            user_round_score = inv_answer_list[user_round_answer]
+            session.user_round_scores[user] = user_round_score
+            session.user_total_scores[user] += user_round_score
+            session.user_round_answers[user] = user_round_answer
+            user_total_scores = session.user_total_scores
+
+        session.round_history[session.search_term] = (session.user_round_scores,session.user_round_answers)
+        session.game_round_count += 1
+        redirect(URL('round_scores'))
+    else:
+        pass
+    return locals()
+
+def round_scores():
+    import operator
+
+    sorted_answers = sorted(session.answer_list.items(),key = operator.itemgetter(0),reverse = True)
+    return locals()
+
+def game_end():
+    import operator
+
+    ordered_game_totals = sorted(session.user_total_scores.items(),key = operator.itemgetter(1),reverse = True)
+    return locals()
+
+def setup_confirmation():
+    response.flash = 'Please confirm your settings'
+    session.flash = 'Suggest a search term'
+    return locals()
+
+def how_to_play():
+    return locals()
+
+def faq():
+    return locals()
+
+def about():
+    return locals()
+
+#TODO create money

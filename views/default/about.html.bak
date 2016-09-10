@@ -1,0 +1,118 @@
+{{extend 'layout2.html'}}
+
+<div style="margin-bottom: 50px;">
+    <P style=" text-align: center"><A href="#about">About</A> |
+    <A href="#how-to-play">How to Play</A> |
+    <A href="#faq">FAQ</A><BR>
+</div>
+    
+<H2><A name="about">About the Game</A></H2>
+
+
+    <body>
+    <br>
+The aim of T.o.t.M is to correctly guess the <b>most popular</b> completed search term, based on predictive data collected by the <a href="http://google.com">Google</a> search engine. 
+    <div align=center>
+    <img src="http://www.startupmoon.com/wp-content/uploads/2014/04/autocomplete2a.png" alt="rest" align="middle"/>
+    </div>
+</body>
+ 
+<body>
+    <p>
+<br><b>Do you know the burning questions that people are searching for answers to? <br>
+Do you consider yourself current, informed, with a broad range of interests? <br>
+</b><br>
+Whatever the case, T.o.t.M will test both your intuition and random cultural knowledge. The questions are endless and the game is as flexible as its players’ imaginations. The answers are entertaining, up-to-date and often surprising. <b>Play a game and find out how in tune you are with the masses! </b>
+    </p>
+
+<br>
+<H2><A name="how-to-play">How to Play</A></H2>
+
+
+    <body>
+        <h4>Setup:</h4>
+        This is a multiplayer game, so you must play with at least one other person.<br><br>
+        
+        1. Select which game mode you would like to play (choose between Classic or Trivia). <br>
+        2. Enter up to 10 players, with names separated by commas.  <br>
+        3. Select your region, which specifies the Google server you would like to use. <br><br>
+
+        <h4>Classic Gameplay:</h4>
+        ☺  A player is nominated to start. They must create and submit a search-term for the other players to complete. <br> <br>
+        ☻  As directed, all other players take turns guessing the most common Google autocomplete suggestions for the given search term.<br><br>
+		
+		<h4>Trivia Gameplay:</h4>
+        ☺  A player is nominated to start. They must choose a category, and based on that selection a search term will be generated. <br> <br>
+        ☻  As directed, all players take turns guessing the most common Google autocomplete suggestions for the given search term.<br><br>
+
+        <h4>Scoring:</h4>
+        ○  Scores are updated once all players have submitted their guesses, with the most popular search terms scoring highest.<br>
+        ○  When all of the rounds have been completed the player with the highest total score wins.<br><br><br>
+    </body>
+
+
+<H2><A name="faq">FAQ</A></H2>
+<h4>
+    <br> What is autocomplete?
+</h4>
+<body>
+    Everybody is familiar with the Google Autocomplete in the search bar. When you start typing a question into the search bar, Google presents you with a selection of endings to anticipate your complete search term, so that you don’t have to type it in full. The results that drop down are the most popular search terms based on past searches. <br>
+
+And who is responsible for these suggestions? All of us. Every time a user Googles something, they are contributing to the overall popularity of that specific question. As people’s real-life searches are affected by overarching political, social and economic influences, T.o.t.M will evolve and remain current.<br>
+    </body>
+
+    <h4>
+        <br> Where does Tyranny of the Majority get its name?
+    </h4>
+    <body>
+        <br>
+        <div align=center>
+            <img src="../static/images/totm_definition.png" alt="rest" align="middle"/>
+        </div>
+        <br>
+        We believe that the phrase captures the essence of the game, in that users define the correct or best answers in a truly democratic fashion, although no answer is objectively right or wrong. The phrase also sparks the kind of curiosity that is inherent to the gameplay, where participants are often spurred to understand the origins of common search-terms.
+    </body>
+
+<h4>
+    <p>
+        <br> What do the images represent?
+    </p>
+</h4>
+    <p>
+    At the start of a new game, players are assigned their player avatars based on images chosen at random from the top <a href="http://google.com/images">Google Images</a> results for each of the names provided. Below are some example player avatars: </p>   
+    
+<div id="container" style="width: 50%;
+margin: 0px auto 0px auto;">
+    {{for player in player_avatars:}}
+    <div3 align=center style="width: 85px; margin: 2px 2px 2px 2px;">
+        <div align=center style="width: 85px;">
+            <img class="roundedxsmall" src="{{=player_avatars[player]}}">
+                <div class="center" style=" font-size: 12px; max-width: 85px; word-wrap: break-word;">
+                            {{=player}}
+                </div>
+            </div>
+        </div3>
+    {{pass}}
+    </div>
+
+    <p>
+        Images are also presented during the game for each search term that is submitted, and these are also the result of choosing a top Google Images result at random for the search term that has been posed.
+    </p>
+
+</body>
+
+        
+<h4>
+    <br> Is “safe search” enabled?
+</h4>
+<body>
+    Yes. Explicit terms will not produce any results. This is due to the Google autocomplete algorithm, and more information can be found <a href="https://support.google.com/websearch/answer/106230?hl=en">here</a>.
+</body>
+
+<br><br><br>
+
+<div style="margin-bottom: 50px;">
+    <P style=" text-align: center"><A href="#about">About</A> |
+    <A href="#how-to-play">How to Play</A> |
+    <A href="#faq">FAQ</A><BR>
+</div>

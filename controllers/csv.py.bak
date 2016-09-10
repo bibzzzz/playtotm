@@ -1,0 +1,17 @@
+def import_and_sync():
+    form = FORM(INPUT(_type='file', _name='data'), INPUT(_type='submit'))
+    if form.process().accepted:
+        db.import_from_csv_file(form.vars.data.file,unique=False)
+        # for every table
+        for table in db.auxverb:
+            # for every uuid, delete all but the latest
+            items = db(db[table]).select(db[table].id,
+                       db[table].term_prefix,
+					   db[table].term_suffix,
+					   db[table].times_ran,
+					   db[table].success,
+					   db[table].engine
+					   )
+            for item in items:
+                db((db[table].uuid==item.uuid)&                   (db[table].id!=item.id)).delete()
+    return dict(form=form)

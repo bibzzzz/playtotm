@@ -1,0 +1,24 @@
+{{extend 'layout.html'}}
+
+<div align=center style ="margin-top:0px; width:100%; -ms-transform: scale(1.3,1.3);-webkit-transform: scale(1.3,1.3); transform: scale(1.3,1.3);">
+
+	<div style=" text-align: left; width: 240px; margin: auto auto;">
+        {{=form.custom.begin}}
+		<br>
+	    {{wdg = form.custom.widget.game_mode}}
+		Game Mode: {{=wdg}}<br>
+		
+        {{wdg = form.custom.widget.player_names}}
+        {{wdg['_placeholder'] = 'Beavis, Butthead, etc...'}}
+		{{wdg['_autofocus'] = True}}
+        Player Names: {{=wdg}}<br>
+    
+        {{wdg = form.custom.widget.search_engine_location}}
+        Search Engine Location: {{=wdg}}<br>
+
+
+        {{=form.custom.submit}}
+        {{=form.custom.end}}
+        
+    </div>
+</div>

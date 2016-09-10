@@ -1,0 +1,36 @@
+{{extend 'layout.nohead.mobile.html'}}
+<div id="container">
+    <div align=center>
+        <div style="margin-top: 30px;">
+            <h3>
+                Players:
+            </h3>
+        </div>
+
+    <div id="container" style="width: 90%;
+margin: 0px auto 0px auto;">
+    {{for player in session.playerlist:}}
+    <div3 align=center style="width: 85px; margin: 1px 1px 1px 1px;">
+        <div align=center style="width: 85px;">
+            <img class="roundedsmall" src="{{=session.player_avatars[player]}}">
+                <div class="center" style=" font-size: 12px; max-width: 85px; word-wrap: break-word;">
+                            {{=player}}
+                </div>
+            </div>
+        </div3>
+    {{pass}}
+    </div>
+
+
+<div2>
+    <h3>
+            Location: <img class="imgflag" src="{{=session.engine_flag_url}}"> <br>
+        </h3>
+    </div2>
+</div>
+
+<div style="margin-bottom:-25">
+   
+        <input type="button" class="btn btn-default btn-lg" onClick="location.href='../'" value='Go Back'> <input type="button" class="btn btn-primary btn-lg" onClick="location.href='../{{=session.sts}}'" value="Play!">
+    
+</div>

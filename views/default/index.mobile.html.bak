@@ -1,0 +1,20 @@
+{{extend 'layout.mobile.html'}}
+
+<div align=center style ="width:100%">
+   <div style=" text-align: left; max-width: 240px;">
+        {{=form.custom.begin}}
+
+	    {{wdg = form.custom.widget.game_mode}}
+		Game Mode: {{=wdg}}<br>
+
+	    {{wdg = form.custom.widget.player_names}}
+        {{wdg['_placeholder'] = 'Beavis, Butthead'}}
+        Player Names: {{=wdg}}<br>
+
+        {{wdg = form.custom.widget.search_engine_location}}
+        Search Engine Location: {{=wdg}}<br><br>
+
+        {{=form.custom.submit}}
+        {{=form.custom.end}}
+   </div>
+</div>

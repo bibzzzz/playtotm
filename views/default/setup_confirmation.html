@@ -1,0 +1,35 @@
+{{extend 'layout.html'}}
+<div id="container">
+    <div align=center>
+        <div id="container">
+            <h2>
+                Players:
+            </h2>
+        </div>
+
+    <div id="container" style="width: 50%;
+margin: 0px auto 0px auto;">
+    {{for player in session.playerlist:}}
+    <div3 align=center style="width: 110px; margin: 2px 2px 2px 2px;">
+        <div align=center style="width: 110px;">
+            <img class="roundedsmall" src="{{=session.player_avatars[player]}}">
+                <div class="center" style=" font-size: 12px; max-width: 85px; word-wrap: break-word;">
+                            {{=player}}
+                </div>
+            </div>
+        </div3>
+    {{pass}}
+    </div>
+
+<div2>
+    <h2>
+            Location: <img class="imgflag" src="{{=session.engine_flag_url}}"> <br>
+        </h2>
+    </div2>
+</div>
+
+
+    <div1 style ="margin-top:20px; width:100%; -ms-transform: scale(1.3,1.3);-webkit-transform: scale(2,2); transform: scale(1.3,1.3);">
+        <input type="button" class="btn btn-default btn-lg" onClick="location.href='../'" value='Go Back'> 
+        <input type="button" autofocus class="btn btn-primary btn-lg" onClick="location.href='../{{=session.sts}}'" value="Play!">
+    </div1>
