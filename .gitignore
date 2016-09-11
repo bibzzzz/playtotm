@@ -1,0 +1,6 @@
+# for git to ignore web2py and local build residue
+
+cache/
+databases/
+errors/
+sessions/
